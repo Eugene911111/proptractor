@@ -1,5 +1,4 @@
 var helper = require('../helpers/helper');
-browser.ignoreSynchronization = true;
 var Computers = function () {
     var self = this;
 
@@ -10,7 +9,6 @@ var Computers = function () {
     this.computersPageContent = $('#main');
 
     this.introducedDateField = $('#introduced');
-
 
     this.discontinuedDateField = $('#discontinued');
 

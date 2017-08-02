@@ -9,6 +9,5 @@ exports.config = {
     onPrepare: function () {
         browser.driver.manage().window().maximize();
         browser.ignoreSynchronization = true;
-    },
-
+    }
 };
