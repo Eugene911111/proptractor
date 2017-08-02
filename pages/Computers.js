@@ -2,163 +2,110 @@ var helper = require('../helpers/helper');
 browser.ignoreSynchronization = true;
 var Computers = function () {
     var self = this;
-    this.addNewComputerButton = function () {
-        return $('#add');
-    };
 
-    this.computerNameField = function () {
-        return $('#name');
-    };
+    this.addNewComputerButton = $('#add');
 
-    this.computersPageContent = function () {
-        return $('#main');
-    };
+    this.computerNameField = $('#name');
 
-    this.introducedDateField = function () {
-        return $('#introduced');
-    };
+    this.computersPageContent = $('#main');
 
-    this.discontinuedDateField = function () {
-        return $('#discontinued');
-    };
+    this.introducedDateField = $('#introduced');
 
-    this.selectAppleInc = function () {
-        return $$('option[value="1"]');
-    };
 
-    this.createThisComputerButton = function () {
-        return $$('.btn.primary');
-    };
+    this.discontinuedDateField = $('#discontinued');
 
-    this.alertMessageWarningField = function () {
-        return $('.alert-message.warning');
-    };
+    this.selectAppleInc = $$('option[value="1"]');
 
-    this.computerHasBeenCreatedMessage = function () {
-        return 'Done! Computer Apple 747 has been created';
-    };
+    this.createThisComputerButton = $$('.btn.primary');
 
-    this.computerHasBeenDeletedMessage = function () {
-        return 'Done! Computer has been deleted';
-    };
+    this.alertMessageWarningField = $('.alert-message.warning');
 
-    this.computerHasBeenUpdatedMessage = function () {
-        return 'Done! Computer Apple 747911 has been updated';
-    };
+    this.computerHasBeenCreatedMessage = 'Done! Computer Apple 747 has been created';
 
-    this.computerName = function () {
-        return 'Apple 747';
-    };
+    this.computerHasBeenDeletedMessage = 'Done! Computer has been deleted';
 
-    this.computerNameAfterEdit = function () {
-        return 'Apple 747911';
-    };
+    this.computerHasBeenUpdatedMessage = 'Done! Computer Apple 747911 has been updated';
 
-    this.filterByComputerNameField = function () {
-        return $('#searchbox');
-    };
+    this.computerName = 'Apple 747';
 
-    this.filterByNameButton = function () {
-        return $('#searchsubmit');
-    };
+    this.computerNameAfterEdit = 'Apple 747911';
 
-    this.deleteThisComputerButton = function () {
-        return $$('.btn.danger');
-    };
+    this.filterByComputerNameField = $('#searchbox');
 
-    this.introducedDateValue = function () {
-        return '2007-07-30';
-    };
+    this.filterByNameButton = $('#searchsubmit');
 
-    this.discontinuedDateValue = function () {
-        return '2007-07-30';
-    };
+    this.deleteThisComputerButton = $$('.btn.danger');
+
+    this.introducedDateValue = '2007-07-30';
+
+    this.discontinuedDateValue = '2007-07-30';
 
     this.addNewComputer = function () {
-        browser.get('/');
-        this.addNewComputerButton().click()
-            .then(function () {
-                return self.computerNameField().sendKeys(self.computerName())
-                    .then(function () {
-                        return self.introducedDateField().sendKeys(self.introducedDateValue())
-                            .then(function () {
-                                return self.discontinuedDateField().sendKeys(self.discontinuedDateValue())
-                                    .then(function () {
-                                        return self.selectAppleInc().click()
-                                            .then(function () {
-                                                return self.createThisComputerButton().click();
-                                            })
-                                    })
-                            })
-                    })
-            })
+        return browser.get('/').then(function () {
+            return self.addNewComputerButton.click()
+        }).then(function () {
+            return self.computerNameField.sendKeys(self.computerName)
+        }).then(function () {
+            return self.introducedDateField.sendKeys(self.introducedDateValue)
+        }).then(function () {
+            return self.discontinuedDateField.sendKeys(self.discontinuedDateValue)
+        }).then(function () {
+            return self.selectAppleInc.click()
+        }).then(function () {
+            return self.createThisComputerButton.click();
+        })
     };
 
     this.checkAlertMessageIsDisplayed = function (message) {
-        return helper.waitForTextToBePresentInElement(self.alertMessageWarningField(), message);
-    };
-    this.returnTrue = function () {
-        return false;
+        return helper.waitForTextToBePresentInElement(self.alertMessageWarningField, message);
     };
 
     this.searchComputer = function (computerName) {
-        browser.get('/');
-        self.filterByComputerNameField().sendKeys(computerName)
-            .then(function () {
-                return self.filterByNameButton().click();
-            });
+        return browser.get('/').then(function () {
+            return self.filterByComputerNameField.sendKeys(computerName)
+        }).then(function () {
+            return self.filterByNameButton.click();
+        });
     };
 
     this.checkAfterSearch = function () {
-        return expect(element(by.linkText(self.computerName())).getTagName()).toBe('a');
+        return expect(element(by.linkText(self.computerName)).getTagName()).toBe('a');
     };
 
     this.upDateComputerName = function (oldName, newName) {
-        browser.get('/');
-        self.filterByComputerNameField().sendKeys(oldName)
-            .then(function () {
-                return self.filterByNameButton().click()
-                    .then(function () {
-                        return expect(element(by.linkText(oldName)).getTagName()).toBe('a')
-                            .then(function () {
-                                return element(by.linkText(oldName)).getTagName().click()
-                                    .then(function () {
-                                        return self.computerNameField().clear()
-                                            .then(function () {
-                                                return self.computerNameField().sendKeys(newName)
-                                                    .then(function () {
-                                                        return self.createThisComputerButton().click();
-                                                    })
-                                            })
-                                    })
-                            })
-                    })
-            })
+        return browser.get('/').then(function () {
+            return self.filterByComputerNameField.sendKeys(oldName)
+        }).then(function () {
+            return self.filterByNameButton.click()
+        }).then(function () {
+            return element(by.linkText(oldName)).getTagName().click()
+        }).then(function () {
+            return self.computerNameField.clear()
+        }).then(function () {
+            return self.computerNameField.sendKeys(newName)
+        }).then(function () {
+            return self.createThisComputerButton.click();
+        })
     };
 
     this.checkThatNewNameIsSaved = function (newName) {
-        return helper.waitForTextToBePresentInElement(self.alertMessageWarningField(), newName);
+        return helper.waitForTextToBePresentInElement(self.alertMessageWarningField, newName);
     };
 
     this.deleteComputeByName = function (computerName) {
-        browser.get('/');
-        self.filterByComputerNameField().sendKeys(computerName)
-            .then(function () {
-                return self.filterByNameButton().click()
-                    .then(function () {
-                        return expect(element(by.linkText(computerName)).getTagName()).toBe('a')
-                            .then(function () {
-                                return element(by.linkText(computerName)).getTagName().click()
-                                    .then(function () {
-                                        return self.deleteThisComputerButton().click();
-                                    })
-                            })
-                    })
-            })
+        return browser.get('/').then(function () {
+            return self.filterByComputerNameField.sendKeys(computerName)
+        }).then(function () {
+            return self.filterByNameButton.click()
+        }).then(function () {
+            return element(by.linkText(computerName)).getTagName().click()
+        }).then(function () {
+            return self.deleteThisComputerButton.click();
+        })
     };
 
     this.checkComputerHasBeenDeleted = function () {
-        return helper.waitForTextToBePresentInElement(self.alertMessageWarningField(), self.computerHasBeenDeletedMessage());
+        return helper.waitForTextToBePresentInElement(self.alertMessageWarningField, self.computerHasBeenDeletedMessage);
     }
 };
 
