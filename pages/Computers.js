@@ -48,6 +48,7 @@ var Computers = function () {
         }).then(function () {
             return $(self.selectors.filterByNameButton).click();
         });
+
     };
 
     this.checkAfterSearch = function () {
@@ -91,37 +92,39 @@ var Computers = function () {
     };
 
     this.countComputers = function () {
-        $$('.computers.zebra-striped tbody tr').count().then(function (countResult) {
-            // console.log("Number of computers is: " + +countResult);
-            return +countResult;
-        });
+        $$('.computers.zebra-striped tbody tr').count()
+            .then(function (countResult) {
+                //console.log("Number of computers is: " + countResult);
+                return countResult;
+            });
     };
-    var self = this;
+
     var max = 6;
-    //var j = 1;
     let map = new Map();
+
     this.setMapp = function (a) {
         map.set(a, a);
     };
-    this.hhh = function (i, j) {
+
+    this.takeTextPutToMap = function (i, j) {
         for (i = 1; i <= max; i++) {
-            var p = element(by.xpath('//table[@class="computers zebra-striped"]//tr[' + i + ']/td[' + j + ']'));
-            p.getText().then(function (f) {
-                console.log('f: ' + f);
-                self.setMapp(f);
+            var p = $('.computers.zebra-striped tr:nth-child(' + i + ') td:nth-child(' + j + ')');
+            p.getText().then(function (text) {
+                console.log('text: ' + text);
+                self.setMapp(text);
             });
         }
     };
 
     this.enterTablesRawName = function (tableRawName) {
         if (tableRawName === 'Computer name') {
-            self.hhh(1, 1);
+            self.takeTextPutToMap(1, 1);
         } else if (tableRawName === 'Introduced') {
-            self.hhh(1, 2);
+            self.takeTextPutToMap(1, 2);
         } else if (tableRawName === 'Discontinued') {
-            self.hhh(1, 3);
+            self.takeTextPutToMap(1, 3);
         } else if (tableRawName === 'Company') {
-            self.hhh(1, 4);
+            self.takeTextPutToMap(1, 4);
         }
     };
 
