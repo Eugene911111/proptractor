@@ -118,7 +118,7 @@ var Computers = function () {
         });
     };
 
-    this.setRawName = function (rawName, valueToFind) {
+    this.setRawNameAndValueToFind = function (rawName, valueToFind) {
         if (rawName === 'Computer name') {
             self.arrOfComputers(self.selectors.computerNameRawSelector, valueToFind);
         } else if (rawName === 'Introduced') {
