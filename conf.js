@@ -7,7 +7,7 @@ exports.config = {
         browserName: 'chrome'
     },
     onPrepare: function () {
-        browser.driver.manage().window().maximize();
+      //  browser.driver.manage().window().maximize();
         browser.ignoreSynchronization = true;
     }
 };

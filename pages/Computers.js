@@ -1,6 +1,8 @@
 var helper = require('../helpers/helper');
 var Computers = function () {
     var self = this;
+    var result;
+
     this.selectors = {
         addNewComputerButton: '#add',
         computerHasBeenCreatedMessage: 'Done! Computer Apple 747 has been created',
@@ -19,7 +21,11 @@ var Computers = function () {
         discontinuedDateValue: '2007-07-30',
         computerNameAfterEdit: 'Apple 747911',
         computerHasBeenUpdatedMessage: 'Done! Computer Apple 747911 has been updated',
-        computerAsciName: 'ASCI'
+        computerAsciName: 'ASCI',
+        computerNameRawSelector: '.computers.zebra-striped tr td:nth-child(1)',
+        introducedRawSelector: '.computers.zebra-striped tr td:nth-child(2)',
+        discontinuedRawSelector: '.computers.zebra-striped tr td:nth-child(3)',
+        companyRawSelector: '.computers.zebra-striped tr td:nth-child(4)'
     };
 
     this.addNewComputer = function () {
@@ -36,10 +42,11 @@ var Computers = function () {
         }).then(function () {
             return $$(self.selectors.createThisComputerButton).click();
         })
-    };
 
+    };
     this.checkAlertMessageIsDisplayed = function (message) {
         return helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), message);
+
     };
 
     this.searchComputer = function (computerName) {
@@ -50,11 +57,10 @@ var Computers = function () {
         });
 
     };
-
     this.checkAfterSearch = function () {
         return expect(element(by.linkText(self.selectors.computerName)).getTagName()).toBe('a');
-    };
 
+    };
     this.upDateComputerName = function (oldName, newName) {
         return browser.get('/').then(function () {
             return $(self.selectors.filterByComputerNameField).sendKeys(oldName)
@@ -69,12 +75,12 @@ var Computers = function () {
         }).then(function () {
             return $$(self.selectors.createThisComputerButton).click();
         })
-    };
 
+    };
     this.checkThatNewNameIsSaved = function (newName) {
         return helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), newName);
-    };
 
+    };
     this.deleteComputeByName = function (computerName) {
         return browser.get('/').then(function () {
             return $(self.selectors.filterByComputerNameField).sendKeys(computerName)
@@ -85,52 +91,44 @@ var Computers = function () {
         }).then(function () {
             return $$(self.selectors.deleteThisComputerButton).click();
         })
-    };
 
+    };
     this.checkComputerHasBeenDeleted = function () {
         return helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), self.selectors.computerHasBeenDeletedMessage);
-    };
 
+    };
     this.countComputers = function () {
-        $$('.computers.zebra-striped tbody tr').count()
+        return $$('.computers.zebra-striped tbody tr').count()
             .then(function (countResult) {
                 //console.log("Number of computers is: " + countResult);
-                return countResult;
+                g = countResult;
+                return g;
             });
     };
 
-    var max = 6;
-    let map = new Map();
-
-    this.setMapp = function (a) {
-        map.set(a, a);
+    this.arrOfComputers = function (rawSelector, valueToFind) {
+        return $$(rawSelector).getText().then(function (textFromPage) {
+            return textFromPage.map(function (x) {
+                result = (x === valueToFind);
+                if (result === true) {
+                    console.log(result);
+                }
+                return result;
+            })
+        });
     };
 
-    this.takeTextPutToMap = function (i, j) {
-        for (i = 1; i <= max; i++) {
-            var p = $('.computers.zebra-striped tr:nth-child(' + i + ') td:nth-child(' + j + ')');
-            p.getText().then(function (text) {
-                console.log('text: ' + text);
-                self.setMapp(text);
-            });
+    this.setRawName = function (rawName, valueToFind) {
+        if (rawName === 'Computer name') {
+            self.arrOfComputers(self.selectors.computerNameRawSelector, valueToFind);
+        } else if (rawName === 'Introduced') {
+            self.arrOfComputers(self.selectors.introducedRawSelector, valueToFind);
+        } else if (rawName === 'Discontinued') {
+            self.arrOfComputers(self.discontinuedRawSelector, valueToFind);
+        } else if (rawName === 'Company') {
+            self.arrOfComputers(self.selectors.companyRawSelector, valueToFind);
         }
-    };
-
-    this.enterTablesRawName = function (tableRawName) {
-        if (tableRawName === 'Computer name') {
-            self.takeTextPutToMap(1, 1);
-        } else if (tableRawName === 'Introduced') {
-            self.takeTextPutToMap(1, 2);
-        } else if (tableRawName === 'Discontinued') {
-            self.takeTextPutToMap(1, 3);
-        } else if (tableRawName === 'Company') {
-            self.takeTextPutToMap(1, 4);
-        }
-    };
-
-    this.isThereComputerWithSuchName = function (suchComputer) {
-        console.log('has key? ' + map.has(suchComputer));
-    };
+    }
 };
 
 module.exports = new Computers();
