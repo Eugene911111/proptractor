@@ -10,9 +10,9 @@ http://computer-database.herokuapp.com/computers
 2) Update computer (updateComputerSpec.js)
 3) Delete computer (deleteComputerSpec.js)
 4) Check “filter by computer” (searchComputerSpec.js)
-5) Search some computer by name and check that some value exists in some row
+5) Search some computer by name and check that some value exists in some row (asciSearchSpec.js)
 
-Setup:
+Setup project:
 ===
 * Install Node (v6.x.x or later)
 * Install Protractor globally with: ```npm install -g protractor```
