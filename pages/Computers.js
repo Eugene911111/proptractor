@@ -1,7 +1,8 @@
 var helper = require('../helpers/helper');
-var Computers = function () {
+var Computers;
+Computers = function () {
     var self = this;
-    var result;
+    var result, arr;
 
     this.selectors = {
         addNewComputerButton: '#add',
@@ -22,7 +23,7 @@ var Computers = function () {
         computerNameAfterEdit: 'Apple 747911',
         computerHasBeenUpdatedMessage: 'Done! Computer Apple 747911 has been updated',
         computerAsciName: 'ASCI',
-        computerNameRawSelector: '.computers.zebra-striped tr td:nth-child(1)',
+        computerNameRawSelector: '.computers.zebra-striped tbody tr',
         introducedRawSelector: '.computers.zebra-striped tr td:nth-child(2)',
         discontinuedRawSelector: '.computers.zebra-striped tr td:nth-child(3)',
         companyRawSelector: '.computers.zebra-striped tr td:nth-child(4)'
@@ -108,13 +109,10 @@ var Computers = function () {
 
     this.arrOfComputers = function (rawSelector, valueToFind) {
         return $$(rawSelector).getText().then(function (textFromPage) {
-            return textFromPage.map(function (x) {
-                result = (x === valueToFind);
-                if (result === true) {
-                    console.log(result);
-                }
-                return result;
-            })
+            return textFromPage.filter(function (x) {
+                console.log(x === valueToFind);
+                return x === valueToFind;
+            });
         });
     };
 
@@ -124,10 +122,29 @@ var Computers = function () {
         } else if (rawName === 'Introduced') {
             self.arrOfComputers(self.selectors.introducedRawSelector, valueToFind);
         } else if (rawName === 'Discontinued') {
-            self.arrOfComputers(self.discontinuedRawSelector, valueToFind);
+            self.arrOfComputers(self.selectors.discontinuedRawSelector, valueToFind);
         } else if (rawName === 'Company') {
             self.arrOfComputers(self.selectors.companyRawSelector, valueToFind);
         }
+    };
+
+    this.getListofComps = function () {
+        return $$('.computers tbody tr').map(function (items) {
+            return {
+                'compname': items.$$('td').get(0).getText(),
+                'Introduced': items.$$('td').get(1).getText(),
+                'Discontinued': items.$$('td').get(2).getText(),
+                'Company': items.$$('td').get(3).getText()
+            }
+        })
+    };
+
+    this.checkValueFromList = function (comp, colm, value) {
+        this.getListofComps().then(function (list) {
+            console.log(list.some(function (item) {
+                return (item.compname === comp && item[colm] === value);
+            }))
+        })
     }
 };
 
