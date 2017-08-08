@@ -1,17 +1,17 @@
 var computers = require('../pages/Computers');
 var helper = require('../helpers/helper');
-var computerName = 'ASCI';
-var comp = 'ASCI Blue Pacific';
-var tableRawName = 'Company';
-var valueToFind = 'IBM';
+var computerNameToSearch = 'ASCI';
+var computerNameInList = 'ASCI Blue Pacific';
+var tableRawName = 'Introduced';
+var valueToFind = '01 Jan 1998';
 
 describe('Cover functionality:', function () {
 
     it('search new computer', function () {
-        computers.searchComputer(computerName);
+        computers.searchComputer(computerNameToSearch);
     });
 
     it('add a new computer', function () {
-        computers.checkValueFromList(comp, tableRawName, valueToFind);
+        computers.checkValueFromList(computerNameInList, tableRawName, valueToFind);
     });
 });
