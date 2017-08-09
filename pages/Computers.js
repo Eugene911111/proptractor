@@ -96,7 +96,6 @@ Computers = function () {
     };
     this.checkComputerHasBeenDeleted = function () {
         return helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), self.selectors.computerHasBeenDeletedMessage);
-
     };
     this.countComputers = function () {
         return $$('.computers.zebra-striped tbody tr').count()

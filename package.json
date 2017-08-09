@@ -1,11 +1,21 @@
 {
   "name": "js_test-master",
   "version": "0.0.1",
-  "keywords": [
-    "test",
-    "testing"
-  ],
+  "description": "",
+  "scripts": {
+    "test": "protractor conf.js"
+  },
+  "author": "",
+  "license": "MIT",
   "dependencies": {
-    
+    "properties-reader": "0.0.15",
+    "protractor": "^5.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Eugene911111/proptractor"
+  },
+  "devDependencies": {
+    "cucumber": "^3.0.0"
   }
 }
