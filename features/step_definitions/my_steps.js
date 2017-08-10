@@ -10,6 +10,7 @@ var myStepDefinitionsWrapper = function () {
         computers.checkAlertMessageIsDisplayed(selectors.computerHasBeenCreatedMessage);
     });
 
+
     this.Given(/^I'm on page$/, function (callback)  {
         callback.pending();
     });
