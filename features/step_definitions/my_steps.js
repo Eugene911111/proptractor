@@ -1,5 +1,6 @@
-var myStepDefinitionsWrapper = function () {
-    var computers = require('../pages/Computers');
+'use strict';
+module.exports = function () {
+    var computers = require('../../pages/Computers');
     var selectors = computers.selectors;
 
     this.When(/^add a new computer$/, function () {
@@ -14,5 +15,5 @@ var myStepDefinitionsWrapper = function () {
     this.Given(/^I'm on page$/, function (callback)  {
         callback.pending();
     });
+
 };
-module.exports = myStepDefinitionsWrapper;
