@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "test": "protractor conf.js"
+    "test": "./node_modules/.bin/cucumber-js"
   },
   "author": "",
   "license": "MIT",

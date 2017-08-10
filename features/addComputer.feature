@@ -1,4 +1,4 @@
-Feature: new
+Feature: working with computers
 
   Scenario: open url click Add computer, fill the fields, press save button
     When add a new computer
