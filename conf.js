@@ -14,7 +14,7 @@ exports.config = {
         format: 'pretty'
     },
     onPrepare: function () {
-        browser.driver.manage().window().maximize();
+        //browser.driver.manage().window().maximize();
         browser.ignoreSynchronization = true;
     }
 };
