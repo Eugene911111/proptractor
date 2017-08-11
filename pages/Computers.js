@@ -2,7 +2,6 @@ var helper = require('../helpers/helper');
 var Computers;
 Computers = function () {
     var self = this;
-    var result, arr;
 
     this.selectors = {
         addNewComputerButton: '#add',
@@ -29,11 +28,11 @@ Computers = function () {
         companyRawSelector: '.computers.zebra-striped tr td:nth-child(4)'
     };
 
-    this.addNewComputer = function () {
+    this.addNewComputer = function (newComputerName) {
         return browser.get('/').then(function () {
             return $(self.selectors.addNewComputerButton).click()
         }).then(function () {
-            return $(self.selectors.computerNameField).sendKeys(self.selectors.computerName)
+            return $(self.selectors.computerNameField).sendKeys(newComputerName)
         }).then(function () {
             return $(self.selectors.introducedDateField).sendKeys(self.selectors.introducedDateValue)
         }).then(function () {
@@ -45,9 +44,8 @@ Computers = function () {
         })
 
     };
-    this.checkAlertMessageIsDisplayed = function (message) {
-        return helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), message);
-
+    this.checkAlertMessageIsDisplayed = function () {
+        helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), 'Done! Computer Apple 747 has been created');
     };
 
     this.searchComputer = function (computerName) {
@@ -82,13 +80,13 @@ Computers = function () {
         return helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), newName);
 
     };
-    this.deleteComputeByName = function (computerName) {
+    this.deleteComputeByName = function () {
         return browser.get('/').then(function () {
-            return $(self.selectors.filterByComputerNameField).sendKeys(computerName)
+            return $(self.selectors.filterByComputerNameField).sendKeys(self.selectors.computerName)
         }).then(function () {
             return $(self.selectors.filterByNameButton).click()
         }).then(function () {
-            return element(by.linkText(computerName)).getTagName().click()
+            return element(by.linkText(self.selectors.computerName)).getTagName().click()
         }).then(function () {
             return $$(self.selectors.deleteThisComputerButton).click();
         })
@@ -144,6 +142,14 @@ Computers = function () {
                 return (item.compname === comp && item[colm] === value);
             }))
         })
+    };
+
+    this.getTextFromAlertMessage = function () {
+        return $(self.selectors.alertMessageWarningField).getText();
+    };
+
+    this.getTextFromFirstLink = function () {
+        return $('.computers.zebra-striped tbody tr:first-child td:first-child').getText();
     }
 };
 

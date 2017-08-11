@@ -4,10 +4,10 @@ var selectors = computers.selectors;
 describe('Cover functionality:', function () {
 
     it('search added computer by name', function () {
-       // computers.searchComputer(selectors.computerName);
+       computers.searchComputer(selectors.computerName);
     });
 
     it('search added computer by name', function () {
-       // computers.checkAfterSearch();
+       computers.checkAfterSearch();
     });
 });

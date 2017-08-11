@@ -4,10 +4,10 @@ var selectors = computers.selectors;
 describe('Cover functionality:', function () {
 
     it('add a new computer', function () {
-      computers.addNewComputer();
+     computers.addNewComputer();
     });
 
     it('check that message about adding computer appeared', function () {
-       computers.checkAlertMessageIsDisplayed(selectors.computerHasBeenCreatedMessage);
+      computers.checkAlertMessageIsDisplayed(selectors.computerHasBeenCreatedMessage);
     });
 });
