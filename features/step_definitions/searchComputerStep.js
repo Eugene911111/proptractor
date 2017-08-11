@@ -1,6 +1,5 @@
 'use strict';
 var computers = require('../../pages/Computers');
-var selectors = computers.selectors;
 
 var chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');

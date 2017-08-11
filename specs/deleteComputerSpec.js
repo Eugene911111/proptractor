@@ -1,5 +1,4 @@
-var computers = require('../pages/Computers');
-var helper = require('../helpers/helper');
+var computers = require('../../pages/Computers');
 var selectors = computers.selectors;
 describe('Cover functionality:', function () {
 

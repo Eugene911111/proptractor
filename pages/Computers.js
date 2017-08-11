@@ -25,7 +25,8 @@ Computers = function () {
         computerNameRawSelector: '.computers.zebra-striped tbody tr',
         introducedRawSelector: '.computers.zebra-striped tr td:nth-child(2)',
         discontinuedRawSelector: '.computers.zebra-striped tr td:nth-child(3)',
-        companyRawSelector: '.computers.zebra-striped tr td:nth-child(4)'
+        companyRawSelector: '.computers.zebra-striped tr td:nth-child(4)',
+        firstLinkInList: '.computers.zebra-striped tbody tr:first-child td:first-child'
     };
 
     this.addNewComputer = function (newComputerName) {
@@ -149,7 +150,7 @@ Computers = function () {
     };
 
     this.getTextFromFirstLink = function () {
-        return $('.computers.zebra-striped tbody tr:first-child td:first-child').getText();
+        return $(self.selectors.firstLinkInList).getText();
     }
 };
 
