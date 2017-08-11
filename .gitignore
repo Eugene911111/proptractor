@@ -4,6 +4,7 @@
 target
 *.mdgit
 .git
+git
 CVS
 .svn
 .hg
