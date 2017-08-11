@@ -14,7 +14,7 @@ module.exports = function () {
         callback();
     });
 
-    this.Then(/^Check that message "([^"]*)" appeared$/, function (message ,callback) {
+    this.Then(/^Check that message "([^"]*)" appeared$/, function (message, callback) {
         expect(computers.getTextFromAlertMessage()).to.eventually.equal(message).and.notify(callback);
     });
 };

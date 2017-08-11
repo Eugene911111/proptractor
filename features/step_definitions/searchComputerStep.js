@@ -14,7 +14,7 @@ module.exports = function () {
         callback();
     });
 
-    this.Then(/^Check that computer with name "([^"]*)" is displayed/, function (computerName ,callback) {
+    this.Then(/^Check that computer with name "([^"]*)" is displayed/, function (computerName, callback) {
         expect(computers.getTextFromFirstLink()).to.eventually.equal(computerName).and.notify(callback);
     });
 };
