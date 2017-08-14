@@ -6,11 +6,11 @@ Feature: Bla bla feature
     When Search computer by name "ASCI"
     Then Check that computer with name "ASCI Purple" is in list of computers
     Then I can verify computers info:
-      | Computer name     | Introduced  | Discontinued | Company |
+      | Computer          | Introduced  | Discontinued | Company |
       | ASCI Blue Pacific | 01 Jan 1998 | -            | IBM     |
     Then I can verify computers info:
-      | Computer name | Company |
-      | ASCI White    | IBM     |
+      | Computer   | Company |
+      | ASCI White | IBM     |
 #    When I clear a search field
 #    When I can go to list of computers from "31" point
 #    Then Check that computer with name "Amiga 4000" is displayed

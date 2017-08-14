@@ -25,8 +25,7 @@ module.exports = function () {
     this.Then(/^I can verify computers info:$/, function (data, callback) {
         var dataFromTable = data.hashes();
         computers.getListofComps().then(function (data) {
-            // how to validate by computer name? data.compname =  dataFromTable.Computer name;
-            console.log(data.Introduced === dataFromTable.Introduced && data.Discontinued === dataFromTable.Discontinued && data.Company === dataFromTable.Company)
+            console.log(data.Computer === dataFromTable.Computer && data.Introduced === dataFromTable.Introduced && data.Discontinued === dataFromTable.Discontinued && data.Company === dataFromTable.Company)
         });
         callback();
     });
