@@ -151,6 +151,14 @@ Computers = function () {
 
     this.getTextFromFirstLink = function () {
         return $(self.selectors.firstLinkInList).getText();
+    };
+
+    this.checkThatComputerWithNameIsInListOfComputers = function (computerName) {
+        return this.getListofComps().then(function (list) {
+            return list.some(function (item) {
+                return (item.compname === computerName);
+            })
+        })
     }
 };
 
