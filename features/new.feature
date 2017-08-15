@@ -11,6 +11,6 @@ Feature: Bla bla feature
     Then I can verify computers info:
       | Computer   | Company |
       | ASCI White | IBM     |
-#    When I clear a search field
-#    When I can go to list of computers from "31" point
-#    Then Check that computer with name "Amiga 4000" is displayed
+    When I clear a search field
+    When I can go to list of computers from "31" point
+    Then Check that computer with name "Amiga 3000" is in list of computers

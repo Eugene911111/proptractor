@@ -1,5 +1,6 @@
 'use strict';
 var computers = require('../../pages/Computers');
+var helper = require('../../helpers/helper');
 
 var chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');
@@ -21,7 +22,6 @@ module.exports = function () {
     this.Then(/^Check that computer with name "([^"]*)" is in list of computers$/, function (computerName, callback) {
         expect(computers.checkThatComputerWithNameIsInListOfComputers(computerName)).to.eventually.equal(true).and.notify(callback);
     });
-
     this.Then(/^I can verify computers info:$/, function (data, callback) {
         var dataFromTable = data.hashes();
         computers.getListofComps().then(function (data) {
@@ -29,4 +29,29 @@ module.exports = function () {
         });
         callback();
     });
+    this.Then(/^I clear a search field$/, function (callback) {
+        $(computers.selectors.filterByComputerNameField).clear().then(function () {
+            return $(computers.selectors.filterByNameButton).click();
+        });
+        callback();
+    });
+
+    var t;
+    this.Then(/^I can go to list of computers from "([^"]*)" point$/, function (value, callback) {
+            var numberOfclickingNextButton = +value.split('')[0];
+            $(computers.selectors.displayingField).getText().then(function (text) {
+                t = text.split(" ")[1] + '';
+                if (t != value) {
+                    for (var i = 0; i < numberOfclickingNextButton; i++) {
+                        $(computers.selectors.nextButton).click().then(function () {
+                        });
+                    }
+                }
+            });
+            callback();
+        }
+    );
 };
+
+
+

@@ -26,7 +26,9 @@ Computers = function () {
         introducedRawSelector: '.computers.zebra-striped tr td:nth-child(2)',
         discontinuedRawSelector: '.computers.zebra-striped tr td:nth-child(3)',
         companyRawSelector: '.computers.zebra-striped tr td:nth-child(4)',
-        firstLinkInList: '.computers.zebra-striped tbody tr:first-child td:first-child'
+        firstLinkInList: '.computers.zebra-striped tbody tr:first-child td:first-child',
+        nextButton: '.next a',
+        displayingField: '.current a'
     };
 
     this.addNewComputer = function (newComputerName) {
