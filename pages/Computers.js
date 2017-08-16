@@ -161,7 +161,29 @@ Computers = function () {
                 return (item.Computer === computerName);
             })
         })
+    };
+
+
+    this.getThatStaff = function () {
+        return $$('.computers tbody tr td').map(function (items) {
+            return {
+                'items': items.getText()
+            }
+        })
+    };
+
+    this.checkStaff = function (compName) {
+        return this.getThatStaff().then(function (list) {
+            return list.some(function (item) {
+                return (item.items === compName);
+            })
+        })
+    };
+    this.clicker = function () {
+        $(self.selectors.nextButton).click().then(function () {
+            self.clicker();
+        })
+
     }
 };
-
 module.exports = new Computers();

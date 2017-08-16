@@ -4,8 +4,11 @@ exports.config = {
     directConnect: true,
     baseUrl: 'http://computer-database.herokuapp.com/computers/',
     framework: 'custom',
+    defaultTimeoutInterval: 25000,
+    allScriptsTimeout: 20000,
+    getPageTimeout: 50000,
     frameworkPath: require.resolve('protractor-cucumber-framework'),
-    specs: ['features/*.feature'],
+    specs: ['features/clickForSomeElementIsShown.feature'],
     capabilities: {
         browserName: 'chrome'
     },

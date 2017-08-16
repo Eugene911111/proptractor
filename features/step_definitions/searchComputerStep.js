@@ -1,7 +1,7 @@
 'use strict';
 var computers = require('../../pages/Computers');
 var helper = require('../../helpers/helper');
-
+var self = this;
 var chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');
 chai.use(chaiAsPromised);
@@ -19,7 +19,7 @@ module.exports = function () {
         expect(computers.getTextFromFirstLink()).to.eventually.equal(computerName).and.notify(callback);
     });
 
-    this.Then(/^Check that computer with name "([^"]*)" is in list of computers$/, function (computerName, callback) {
+    this.Then(/^Check that computer with name "([^"]*)" is in list of computers$/, {timeout: 120 * 1000}, function (computerName, callback) {
         expect(computers.checkThatComputerWithNameIsInListOfComputers(computerName)).to.eventually.equal(true).and.notify(callback);
     });
     this.Then(/^I can verify computers info:$/, function (data, callback) {
@@ -38,19 +38,44 @@ module.exports = function () {
 
     var t;
     this.Then(/^I can go to list of computers from "([^"]*)" point$/, function (value, callback) {
-            var numberOfclickingNextButton = +value.split('')[0];
-            $(computers.selectors.displayingField).getText().then(function (text) {
-                t = text.split(" ")[1] + '';
-                if (t != value) {
-                    for (var i = 0; i < numberOfclickingNextButton; i++) {
-                        $(computers.selectors.nextButton).click().then(function () {
-                        });
-                    }
+        var numberOfclickingNextButton = +value.split('')[0];
+        $(computers.selectors.displayingField).getText().then(function (text) {
+            t = text.split(" ")[1] + '';
+            if (t != value) {
+                for (var i = 0; i < numberOfclickingNextButton; i++) {
+                    $(computers.selectors.nextButton).click().then(function () {
+                    });
+                }
+            }
+        });
+        callback();
+    });
+
+    this.When(/^I open url$/, function () {
+        browser.get('/');
+    });
+
+    this.When(/^I click that staff till see comp with name: "([^"]*)"$/, function (compnameToSee, callback) {
+        (function process(index) {
+            if (index >= 200) {
+                return;
+            }
+            computers.checkStaff(compnameToSee).then(function (text) {
+                if (text == true) {
+                }
+                else if (text == false) {
+                    $(computers.selectors.nextButton).click();
+                    process(index + 1);
                 }
             });
             callback();
-        }
-    );
+        })(0);
+    });
+
+    this.Then(/^I want to $/, function (computerName, callback) {
+        expect(computers.getTextFromFirstLink()).to.eventually.equal(computerName).and.notify(callback);
+    });
+
 };
 
 
