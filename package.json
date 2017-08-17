@@ -3,11 +3,14 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "test": "./node_modules/.bin/cucumber-js"
+    "test": "./node_modules/.bin/cucumber-js",
+    "report": "allure generate allure-results --clean -o allure-report && allure open allure-report",
+    "allure-generate-report": "node ./node_modules/allure-commandline/bin/allure generate ./reports/allure-xml-report -o ./reports/allure-html-report"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "allure-js-commons": "^1.3.0",
     "properties-reader": "0.0.15",
     "protractor": "^5.1.2"
   },
@@ -21,11 +24,9 @@
     "chai-as-promised": "5.1.0",
     "cucumber": "^1.3.3",
     "cucumberjs-allure-reporter": "^1.0.3",
-    "protractor-cucumber": "0.1.5",
-    "protractor-cucumber-framework": "^3.1.2",
-    "wdio-allure-reporter": "^0.1.2",
     "mocha": "^3.3.0",
-    "mocha-allure-reporter": "^1.2.0",
-    "mocha-multi": "^0.11.0"
+    "mocha-multi": "^0.11.0",
+    "protractor-cucumber": "0.1.5",
+    "protractor-cucumber-framework": "^3.1.2"
   }
 }

@@ -165,7 +165,7 @@ Computers = function () {
 
 
     this.getThatStaff = function () {
-        return $$('.computers tbody tr td').map(function (items) {
+        return $$('.computers tbody tr td a').map(function (items) {
             return {
                 'items': items.getText()
             }

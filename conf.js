@@ -5,9 +5,11 @@ exports.config = {
     baseUrl: 'http://computer-database.herokuapp.com/computers/',
     framework: 'custom',
     frameworkPath: require.resolve('protractor-cucumber-framework'),
-    specs: ['features/clickForSomeElementIsShown.feature'],
+    specs: ['features/*.feature'],
     capabilities: {
-        browserName: 'chrome'
+        browserName: 'chrome',
+        shardTestFiles:true,
+        maxInstances:3
     },
     cucumberOpts: {
         require: 'features/step_definitions/*.js',
