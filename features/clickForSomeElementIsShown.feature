@@ -4,5 +4,5 @@ Feature: Click next button for some text is displayed on page
   Click for text is not displayed
 
     When I open url
-#    When I click that staff till see comp with name: "IBM 701"
-#    Then Check that computer with name "IBM 701" is in list of computers
+    When I click that staff till see comp with name: "Amiga 3000UX"
+    Then Check that computer with name "Amiga 3000UX" is in list of computers

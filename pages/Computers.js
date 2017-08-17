@@ -183,7 +183,6 @@ Computers = function () {
         $(self.selectors.nextButton).click().then(function () {
             self.clicker();
         })
-
     }
 };
 module.exports = new Computers();

@@ -55,27 +55,27 @@ module.exports = function () {
         browser.get('/');
     });
 
-    this.When(/^I click that staff till see comp with name: "([^"]*)"$/, function (compnameToSee, callback) {
+    this.When(/^I click that staff till see comp with name: "([^"]*)"$/, function (compNameToSee, callback) {
         (function process(index) {
-            if (index >= 200) {
-                return;
-            }
-            computers.checkStaff(compnameToSee).then(function (text) {
-                if (text == true) {
+            $(computers.selectors.displayingField).getText().then(function (text) {
+                t = text.split(" ")[5] + '';
+                var maxNumberOfIterations = +(t.split('')[0] + t.split('')[1]);
+                if (index >= maxNumberOfIterations) {
+                    return;
                 }
-                else if (text == false) {
+            });
+            computers.checkStaff(compNameToSee).then(function (text) {
+                if (text == false) {
                     $(computers.selectors.nextButton).click();
                     process(index + 1);
+                }
+                else (text == true)
+                {
                 }
             });
             callback();
         })(0);
     });
-
-    this.Then(/^I want to $/, function (computerName, callback) {
-        expect(computers.getTextFromFirstLink()).to.eventually.equal(computerName).and.notify(callback);
-    });
-
 };
 
 
