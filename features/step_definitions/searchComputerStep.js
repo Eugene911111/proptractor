@@ -19,13 +19,13 @@ module.exports = function () {
         expect(computers.getTextFromFirstLink()).to.eventually.equal(computerName).and.notify(callback);
     });
 
-    this.Then(/^Check that computer with name "([^"]*)" is in list of computers$/, {timeout: 120 * 1000}, function (computerName, callback) {
+    this.Then(/^Check that computer with name "([^"]*)" is in list of computers$/, {timeout: 20 * 1000}, function (computerName, callback) {
         expect(computers.checkThatComputerWithNameIsInListOfComputers(computerName)).to.eventually.equal(true).and.notify(callback);
     });
     this.Then(/^I can verify computers info:$/, function (data, callback) {
         var dataFromTable = data.hashes();
         computers.getListofComps().then(function (data) {
-           // console.log(data.Computer === dataFromTable.Computer && data.Introduced === dataFromTable.Introduced && data.Discontinued === dataFromTable.Discontinued && data.Company === dataFromTable.Company)
+            // console.log(data.Computer === dataFromTable.Computer && data.Introduced === dataFromTable.Introduced && data.Discontinued === dataFromTable.Discontinued && data.Company === dataFromTable.Company)
         });
         callback();
     });
@@ -72,6 +72,34 @@ module.exports = function () {
                 else (text == true)
                 {
                 }
+            });
+            callback();
+        })(0);
+    });
+
+
+    this.When(/^I delete that staff till see comp with name: "([^"]*)"$/, function (compNameToSee, callback) {
+        (function process(index) {
+            $(computers.selectors.displayingField).getText().then(function (text) {
+                t = text.split(" ")[5] + '';
+                var maxNumberOfIterations = +(t.split('')[0] + t.split('')[1]);
+                // if (index >= maxNumberOfIterations) {
+                //     return;
+                // }
+                // });
+                computers.checkStaff(compNameToSee).then(function (text) {
+                    if (text == false) {
+                        $(computers.selectors.nextButton).click();
+                        process(index + 1);
+                    }
+                    else if (text == true) {
+                        element(by.xpath("//tbody/tr/td/a[contains(., '" + compNameToSee + "')]")).click().then(function () {
+                            $(computers.selectors.deleteThisComputerButton).click().then(function () {
+                                process(index + 1);
+                            })
+                        });
+                    }
+                });
             });
             callback();
         })(0);

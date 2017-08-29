@@ -1,5 +1,12 @@
 var helper = require('../helpers/helper');
 var Computers;
+
+
+var chai = require('chai');
+var chaiAsPromised = require('chai-as-promised');
+chai.use(chaiAsPromised);
+
+var expect = chai.expect;
 Computers = function () {
     var self = this;
 
@@ -183,6 +190,10 @@ Computers = function () {
         $(self.selectors.nextButton).click().then(function () {
             self.clicker();
         })
+    };
+    this.checkNextIsDisabled = function () {
+        console.log(" next disabled: "+element(by.css('.next.disabled')).isDisplayed());
+
     }
 };
 module.exports = new Computers();

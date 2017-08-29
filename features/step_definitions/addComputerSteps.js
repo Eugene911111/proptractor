@@ -10,11 +10,13 @@ var expect = chai.expect;
 module.exports = function () {
 
     this.When(/^Add a new computer "([^"]*)"$/, function (compName, callback) {
-        computers.addNewComputer(compName);
+        // for (var i = 0; i < 200; i++) {
+            computers.addNewComputer(compName);
+        // }
         callback();
     });
 
-    this.Then(/^Check that message "([^"]*)" appeared$/, {timeout: 120 * 1000}, function (message, callback) {
+    this.Then(/^Check that message "([^"]*)" appeared$/, {timeout: 220 * 1000}, function (message, callback) {
         expect(computers.getTextFromAlertMessage()).to.eventually.equal(message).and.notify(callback);
     });
 }

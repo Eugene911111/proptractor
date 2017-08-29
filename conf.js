@@ -8,21 +8,17 @@ exports.config = {
     specs: ['features/*.feature'],
     capabilities: {
         browserName: 'chrome',
-        shardTestFiles:true,
-        maxInstances:3
+        // shardTestFiles: true,
+        // maxInstances: 2
     },
     cucumberOpts: {
         require: 'features/step_definitions/*.js',
-        format: 'pretty'
+        format: 'pretty',
+        //  tags: '@clickAndDelete'
     },
     onPrepare: function () {
         // browser.driver.manage().window().maximize();
         browser.ignoreSynchronization = true;
     },
-    reporters: ['dot', 'allure'],
-    reporterOptions: {
-        allure: {
-            outputDir: 'allure-results'
-        }
-    }
+    reporters: ['progress', 'allure'],
 };
