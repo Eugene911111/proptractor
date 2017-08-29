@@ -138,7 +138,7 @@ Computers = function () {
     this.getListofComps = function () {
         return $$('.computers tbody tr').map(function (items) {
             return {
-                'Computer': items.$$('td').get(0).getText(),
+                'Computer name': items.$$('td').get(0).getText(),
                 'Introduced': items.$$('td').get(1).getText(),
                 'Discontinued': items.$$('td').get(2).getText(),
                 'Company': items.$$('td').get(3).getText()
@@ -149,7 +149,7 @@ Computers = function () {
     this.checkValueFromList = function (comp, colm, value) {
         this.getListofComps().then(function (list) {
             console.log(list.some(function (item) {
-                return (item.Computer === comp && item[colm] === value);
+                return (item["Computer name"] === comp && item[colm] === value);
             }))
         })
     };
@@ -165,7 +165,7 @@ Computers = function () {
     this.checkThatComputerWithNameIsInListOfComputers = function (computerName) {
         return this.getListofComps().then(function (list) {
             return list.some(function (item) {
-                return (item.Computer === computerName);
+                return (item["Computer name"] === computerName);
             })
         })
     };

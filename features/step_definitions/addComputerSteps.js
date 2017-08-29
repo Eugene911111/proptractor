@@ -9,10 +9,10 @@ var expect = chai.expect;
 
 module.exports = function () {
 
-    this.When(/^Add a new computer "([^"]*)"$/, function (compName, callback) {
-        // for (var i = 0; i < 200; i++) {
+    this.When(/^Add a new computer "([^"]*)" "([^"]*)" times$/, function (compName, numberOfComputers, callback) {
+        for (var i = 0; i < numberOfComputers; i++) {
             computers.addNewComputer(compName);
-        // }
+        }
         callback();
     });
 

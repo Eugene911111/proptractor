@@ -1,7 +1,7 @@
 var computers = require('../pages/Computers');
 var helper = require('../helpers/helper');
 var computerNameToSearch = 'ASCI';
-var computerNameInList = 'ASCI Blue Pacific';
+var computerNameInList = 'ASCI Blue Mountain';
 var tableRawName = 'Introduced';
 var valueToFind = '01 Jan 1998';
 

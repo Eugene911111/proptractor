@@ -12,9 +12,9 @@ exports.config = {
         // maxInstances: 2
     },
     cucumberOpts: {
-        require: 'features/step_definitions/*.js',
+        require: ['features/step_definitions/*.js', 'features/reporter.js'],
         format: 'pretty',
-        //  tags: '@clickAndDelete'
+        // tags: ['@clickAndDelete', '@addComputer']
     },
     onPrepare: function () {
         // browser.driver.manage().window().maximize();

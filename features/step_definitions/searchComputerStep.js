@@ -22,13 +22,15 @@ module.exports = function () {
     this.Then(/^Check that computer with name "([^"]*)" is in list of computers$/, {timeout: 20 * 1000}, function (computerName, callback) {
         expect(computers.checkThatComputerWithNameIsInListOfComputers(computerName)).to.eventually.equal(true).and.notify(callback);
     });
+
     this.Then(/^I can verify computers info:$/, function (data, callback) {
         var dataFromTable = data.hashes();
         computers.getListofComps().then(function (data) {
-            // console.log(data.Computer === dataFromTable.Computer && data.Introduced === dataFromTable.Introduced && data.Discontinued === dataFromTable.Discontinued && data.Company === dataFromTable.Company)
+           return data["Computer name"] === dataFromTable["Computer name"] && data.Introduced === dataFromTable.Introduced && data.Discontinued === dataFromTable.Discontinued && data.Company === dataFromTable.Company
         });
         callback();
     });
+
     this.Then(/^I clear a search field$/, function (callback) {
         $(computers.selectors.filterByComputerNameField).clear().then(function () {
             return $(computers.selectors.filterByNameButton).click();

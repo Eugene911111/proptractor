@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "test": "./node_modules/.bin/cucumber-js",
+    "rr" : "mvn site -Dallure.results_pattern=reports",
     "report": "allure generate allure-results --clean -o allure-report && allure open allure-report",
     "allure-generate-report": "node ./node_modules/allure-commandline/bin/allure generate ./reports/allure-xml-report -o ./reports/allure-html-report"
   },
@@ -19,18 +20,18 @@
     "url": "git://github.com/Eugene911111/proptractor"
   },
   "devDependencies": {
+    "allure-commandline": "^2.3.3",
     "chai": "3.2.0",
     "chai-as-promised": "5.1.0",
     "cucumber": "^1.3.3",
+    "cucumber-html-report": "^0.6.0",
+    "cucumber-html-reporter": "^0.5.2",
     "cucumberjs-allure-reporter": "^1.0.3",
     "mocha": "^3.3.0",
     "mocha-multi": "^0.11.0",
     "protractor": "^5.1.2",
     "protractor-cucumber": "0.1.5",
     "protractor-cucumber-framework": "^3.1.2",
-    "cucumber-html-report": "^0.6.0",
-    "cucumber-html-reporter": "^0.5.2",
-    "protractor-html-screenshot-reporter": "0.0.21",
-    "pg": "^6.0.3"
+    "protractor-html-screenshot-reporter": "0.0.21"
   }
 }
