@@ -186,14 +186,15 @@ Computers = function () {
             })
         })
     };
+
     this.clicker = function () {
         $(self.selectors.nextButton).click().then(function () {
             self.clicker();
         })
     };
-    this.checkNextIsDisabled = function () {
-        console.log(" next disabled: "+element(by.css('.next.disabled')).isDisplayed());
 
+    this.checkNextIsDisabled = function () {
+        console.log(" next disabled: " + element(by.css('.next.disabled')).isDisplayed());
     }
 };
 module.exports = new Computers();
