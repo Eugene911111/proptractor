@@ -2,10 +2,10 @@
 
 exports.config = {
     directConnect: true,
-    baseUrl: 'http://computer-database.herokuapp.com/computers/',
+    baseUrl: 'https://jqueryui.com/',
     framework: 'custom',
     frameworkPath: require.resolve('protractor-cucumber-framework'),
-    specs: ['features/*.feature'],
+    specs: ['features/accordion.feature'],
     capabilities: {
         browserName: 'chrome',
         // shardTestFiles: true,

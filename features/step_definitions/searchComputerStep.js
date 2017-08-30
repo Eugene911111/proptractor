@@ -26,7 +26,7 @@ module.exports = function () {
     this.Then(/^I can verify computers info:$/, function (data, callback) {
         var dataFromTable = data.hashes();
         computers.getListofComps().then(function (data) {
-           return data["Computer name"] === dataFromTable["Computer name"] && data.Introduced === dataFromTable.Introduced && data.Discontinued === dataFromTable.Discontinued && data.Company === dataFromTable.Company
+            return data["Computer name"] === dataFromTable["Computer name"] && data.Introduced === dataFromTable.Introduced && data.Discontinued === dataFromTable.Discontinued && data.Company === dataFromTable.Company
         });
         callback();
     });
@@ -84,11 +84,6 @@ module.exports = function () {
         (function process(index) {
             $(computers.selectors.displayingField).getText().then(function (text) {
                 t = text.split(" ")[5] + '';
-                var maxNumberOfIterations = +(t.split('')[0] + t.split('')[1]);
-                // if (index >= maxNumberOfIterations) {
-                //     return;
-                // }
-                // });
                 computers.checkStaff(compNameToSee).then(function (text) {
                     if (text == false) {
                         $(computers.selectors.nextButton).click();

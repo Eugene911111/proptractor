@@ -19,5 +19,4 @@ module.exports = function () {
     this.Then(/^Check that message "([^"]*)" appeared$/, {timeout: 220 * 1000}, function (message, callback) {
         expect(computers.getTextFromAlertMessage()).to.eventually.equal(message).and.notify(callback);
     });
-}
-;
+};
