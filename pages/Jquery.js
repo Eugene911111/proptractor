@@ -21,5 +21,23 @@ Jquery = function () {
     this.checkThatSection1IsOpened = function () {
         return helper.waitForTextToBePresentInElement($(self.selectors.fieldWithSection1Text), 'Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.');
     };
+
+    this.getMonthAndYearFromDatepicker = function () {
+        return $$('.ui-datepicker-title').map(function (date) {
+            return {
+                'month': date.$('.ui-datepicker-month').getText(),
+                'year': date.$('.ui-datepicker-year').getText()
+            }
+        })
+    };
+
+    this.checkDate = function (month, year) {
+        return this.getMonthAndYearFromDatepicker().then(function (list) {
+            return (list.some(function (date) {
+                return (date.month === month && date.year === year);
+            }))
+        })
+    };
+
 };
 module.exports = new Jquery();

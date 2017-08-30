@@ -71,8 +71,7 @@ module.exports = function () {
                     $(computers.selectors.nextButton).click();
                     process(index + 1);
                 }
-                else (text == true)
-                {
+                else if (text == true) {
                 }
             });
             callback();
