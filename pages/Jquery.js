@@ -7,7 +7,8 @@ Jquery = function () {
         fieldWithSection4Text: '#ui-id-8 p:nth-child(1)',
         fieldWithSection1: '#ui-id-1',
         section4Button: '#ui-id-7',
-        fieldWithSection1Text: '#ui-id-2 p:nth-child(1)'
+        fieldWithSection1Text: '#ui-id-2 p:nth-child(1)',
+        nextButtonOnDatePicker: '.ui-datepicker-next.ui-corner-all'
     };
 
     this.getTextFromSection4 = function () {

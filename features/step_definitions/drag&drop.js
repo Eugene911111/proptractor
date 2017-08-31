@@ -21,6 +21,7 @@ module.exports = function () {
     });
 
     this.When(/^The drop zone become highlight$/, function () {
-        expect(browser.wait(EC.textToBePresentInElement($('.ui-widget-header.ui-droppable.ui-state-highlight p'), 'Dropped!'), 15000));
+        expect(browser.wait(EC.textToBePresentInElement($('.ui-widget-header.ui-droppable.ui-state-highlight p'), 'Dropped!'), 5000));
+        expect($('.ui-widget-header.ui-droppable.ui-state-highlight').getCssValue("background-color")).to.eventually.equal("rgba(255, 250, 144, 1)");
     });
 };

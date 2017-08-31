@@ -5,7 +5,7 @@ exports.config = {
     baseUrl: 'https://jqueryui.com/',
     framework: 'custom',
     frameworkPath: require.resolve('protractor-cucumber-framework'),
-    specs: ['features/datepicker.feature'],
+    specs: ['features/drag&drop.feature'],
     capabilities: {
         browserName: 'chrome',
         // shardTestFiles: true,

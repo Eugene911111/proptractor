@@ -13,7 +13,7 @@ module.exports = function () {
         browser.get('/datepicker/');
     });
 
-    this.When(/^Select date$/, function () {
+    this.When(/^I open datepicker$/, function () {
         var driver = browser.driver;
         var loc = (by.tagName('iframe'));
         var el = driver.findElement(loc);
@@ -21,17 +21,18 @@ module.exports = function () {
         $('.hasDatepicker').click();
     });
 
-    this.When(/^I check$/, function (callback) {
+    this.When(/^I select date "([^"]*)" "([^"]*)" "([^"]*)"$/, function (month, year, day, callback) {
         (function process(index) {
-            if (index >= 15) {
+            if (index >= 50) {
                 return;
             }
-
-            jquery.checkDate('August', '2018').then(function (result) {
+            jquery.checkDate(month, year).then(function (result) {
                 if (result == false) {
-                    $('.ui-datepicker-next.ui-corner-all').click();
+                    $(jquery.selectors.nextButtonOnDatePicker).click();
                     process(index + 1);
                 } else if (result == true) {
+                    element(by.xpath('//tbody//a[contains(., ' + day + ')]')).click();
+                    browser.sleep(1000);
                 }
             });
             callback();
