@@ -18,7 +18,7 @@ var Helper = function () {
         var driver = browser.driver;
         var loc = (by.tagName('iframe'));
         var el = driver.findElement(loc);
-        browser.switchTo().frame(el);
+        return browser.switchTo().frame(el);
     };
 
 };

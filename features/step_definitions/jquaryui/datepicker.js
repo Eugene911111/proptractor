@@ -1,6 +1,6 @@
 'use strict';
-var jquery = require('../../pages/Jquery');
-var helper = require('../../helpers/helper');
+var jquery = require('../../../pages/Jquery');
+var helper = require('../../../helpers/helper');
 module.exports = function () {
 
     this.When(/^I open datepicker page$/, function () {

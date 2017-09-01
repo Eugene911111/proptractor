@@ -1,6 +1,6 @@
 'use strict';
-var helper = require('../../helpers/helper');
-var jquery = require('../../pages/Jquery');
+var helper = require('../../../helpers/helper');
+var jquery = require('../../../pages/Jquery');
 var EC = protractor.ExpectedConditions;
 var chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');

@@ -13,7 +13,9 @@ Jquery = function () {
         dropZone: '.ui-widget-header.ui-droppable',
         gragNDropElement: '.ui-widget-content.ui-draggable.ui-draggable-handle',
         datePickerField: '.hasDatepicker',
-        tooltip: '//div[@class="ui-helper-hidden-accessible"]/div[contains(., "That\'s what this widget is")]'
+        tooltip: '.ui-tooltip-content',
+        iframe: '.demo-frame',
+        tooltipsLink: 'body p:nth-child(1) a'
     };
 
     this.getTextFromSection4 = function () {
