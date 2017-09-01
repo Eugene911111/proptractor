@@ -8,7 +8,11 @@ Jquery = function () {
         fieldWithSection1: '#ui-id-1',
         section4Button: '#ui-id-7',
         fieldWithSection1Text: '#ui-id-2 p:nth-child(1)',
-        nextButtonOnDatePicker: '.ui-datepicker-next.ui-corner-all'
+        nextButtonOnDatePicker: '.ui-datepicker-next.ui-corner-all',
+        dropZoneAfterDropping: '.ui-widget-header.ui-droppable.ui-state-highlight',
+        dropZone: '.ui-widget-header.ui-droppable',
+        gragNDropElement: '.ui-widget-content.ui-draggable.ui-draggable-handle',
+        datePickerField: '.hasDatepicker'
     };
 
     this.getTextFromSection4 = function () {

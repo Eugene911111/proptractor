@@ -14,6 +14,13 @@ var Helper = function () {
         return expect(browser.wait(EC.visibilityOf(element), 15000));
     };
 
+    this.switchToIframe = function () {
+        var driver = browser.driver;
+        var loc = (by.tagName('iframe'));
+        var el = driver.findElement(loc);
+        browser.switchTo().frame(el);
+    };
+
 };
 
 module.exports = new Helper();

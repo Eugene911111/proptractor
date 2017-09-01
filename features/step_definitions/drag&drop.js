@@ -1,5 +1,6 @@
 'use strict';
 var helper = require('../../helpers/helper');
+var jquery = require('../../pages/Jquery');
 var EC = protractor.ExpectedConditions;
 var chai = require('chai');
 var chaiAsPromised = require('chai-as-promised');
@@ -13,15 +14,12 @@ module.exports = function () {
     });
 
     this.When(/^I drag and drop the element$/, function () {
-        var driver = browser.driver;
-        var loc = (by.tagName('iframe'));
-        var el = driver.findElement(loc);
-        browser.switchTo().frame(el);
-        browser.actions().dragAndDrop($('.ui-widget-content.ui-draggable.ui-draggable-handle'), $('.ui-widget-header.ui-droppable')).mouseUp().perform();
+        helper.switchToIframe();
+        browser.actions().dragAndDrop($(jquery.selectors.gragNDropElement), $(jquery.selectors.dropZone)).mouseUp().perform();
     });
 
     this.When(/^The drop zone become highlight$/, function () {
-        expect(browser.wait(EC.textToBePresentInElement($('.ui-widget-header.ui-droppable.ui-state-highlight p'), 'Dropped!'), 5000));
-        expect($('.ui-widget-header.ui-droppable.ui-state-highlight').getCssValue("background-color")).to.eventually.equal("rgba(255, 250, 144, 1)");
+        expect(browser.wait(EC.textToBePresentInElement($(jquery.selectors.dropZoneAfterDropping), 'Dropped!'), 5000));
+        expect($(jquery.selectors.dropZoneAfterDropping).getCssValue("background-color")).to.eventually.equal("rgba(255, 250, 144, 1)");
     });
 };

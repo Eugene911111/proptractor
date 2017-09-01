@@ -13,10 +13,7 @@ module.exports = function () {
     });
 
     this.Then(/^I click Section 4$/, function () {
-        var driver = browser.driver;
-        var loc = (by.tagName('iframe'));
-        var el = driver.findElement(loc);
-        browser.switchTo().frame(el);
+        helper.switchToIframe();
         $(jquery.selectors.section4Button).click();
         jquery.checkThatSection4IsOpened();
     });
