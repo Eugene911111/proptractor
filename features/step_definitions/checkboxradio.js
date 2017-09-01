@@ -1,8 +1,6 @@
 'use strict';
-var jquery = require('../../pages/Jquery');
 var helper = require('../../helpers/helper');
 module.exports = function () {
-    var EC = protractor.ExpectedConditions;
     var chai = require('chai');
     var chaiAsPromised = require('chai-as-promised');
     chai.use(chaiAsPromised);
@@ -11,7 +9,6 @@ module.exports = function () {
     this.When(/^I open page checkboxradio page$/, function () {
         browser.get('/checkboxradio/');
     });
-
 
     this.When(/^Select London radiobutton$/, function () {
         helper.switchToIframe();

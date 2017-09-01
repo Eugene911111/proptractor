@@ -1,11 +1,7 @@
 'use strict';
 var helper = require('../../helpers/helper');
+var jquery = require('../../pages/Jquery');
 var EC = protractor.ExpectedConditions;
-var chai = require('chai');
-var chaiAsPromised = require('chai-as-promised');
-chai.use(chaiAsPromised);
-
-var expect = chai.expect;
 module.exports = function () {
 
     this.When(/^I open tooltip page$/, function () {
@@ -18,6 +14,6 @@ module.exports = function () {
     });
 
     this.When(/^I check that the tooltip appeared$/, function () {
-        browser.wait(EC.presenceOf((element(by.xpath('//div[@class="ui-helper-hidden-accessible"]/div[contains(., "That\'s what this widget is")]')))), 5000);
+        browser.wait(EC.presenceOf((element(by.xpath(jquery.selectors.tooltip)))), 5000);
     });
 };
