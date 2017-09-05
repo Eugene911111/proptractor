@@ -15,7 +15,9 @@ Jquery = function () {
         datePickerField: '.hasDatepicker',
         tooltip: '.ui-tooltip-content',
         iframe: '.demo-frame',
-        tooltipsLink: 'body p:nth-child(1) a'
+        tooltipsLink: 'body p:nth-child(1) a',
+        londonRadioButton: 'label[for="radio-3"]',
+        _4StarCheckBox: 'label[for="checkbox-3"]'
     };
 
     this.getTextFromSection4 = function () {
@@ -24,10 +26,6 @@ Jquery = function () {
 
     this.checkThatSection4IsOpened = function () {
         return helper.waitForTextToBePresentInElement($(self.selectors.fieldWithSection4Text), '');
-    };
-
-    this.checkThatSection1IsOpened = function () {
-        return helper.waitForTextToBePresentInElement($(self.selectors.fieldWithSection1Text), 'Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.');
     };
 
     this.getMonthAndYearFromDatepicker = function () {

@@ -1,14 +1,8 @@
 var helper = require('../helpers/helper');
 var Computers;
 
-var chai = require('chai');
-var chaiAsPromised = require('chai-as-promised');
-chai.use(chaiAsPromised);
-
-var expect = chai.expect;
 Computers = function () {
     var self = this;
-
     this.selectors = {
         addNewComputerButton: '#add',
         computerHasBeenCreatedMessage: 'Done! Computer Apple 747 has been created',
@@ -34,7 +28,8 @@ Computers = function () {
         companyRawSelector: '.computers.zebra-striped tr td:nth-child(4)',
         firstLinkInList: '.computers.zebra-striped tbody tr:first-child td:first-child',
         nextButton: '.next a',
-        displayingField: '.current a'
+        displayingField: '.current a',
+        computersNameField: '.computers tbody tr td a'
     };
 
     this.addNewComputer = function (newComputerName) {
@@ -66,7 +61,7 @@ Computers = function () {
 
     };
     this.checkAfterSearch = function () {
-        return expect(element(by.linkText(self.selectors.computerName)).getTagName()).toBe('a');
+        return helper.expect(element(by.linkText(self.selectors.computerName)).getTagName()).toBe('a');
 
     };
     this.upDateComputerName = function (oldName, newName) {
@@ -87,8 +82,8 @@ Computers = function () {
     };
     this.checkThatNewNameIsSaved = function (newName) {
         return helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), newName);
-
     };
+
     this.deleteComputeByName = function () {
         return browser.get('/').then(function () {
             return $(self.selectors.filterByComputerNameField).sendKeys(self.selectors.computerName)
@@ -99,18 +94,10 @@ Computers = function () {
         }).then(function () {
             return $$(self.selectors.deleteThisComputerButton).click();
         })
-
     };
+
     this.checkComputerHasBeenDeleted = function () {
         return helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), self.selectors.computerHasBeenDeletedMessage);
-    };
-    this.countComputers = function () {
-        return $$('.computers.zebra-striped tbody tr').count()
-            .then(function (countResult) {
-                //console.log("Number of computers is: " + countResult);
-                g = countResult;
-                return g;
-            });
     };
 
     this.arrOfComputers = function (rawSelector, valueToFind) {
@@ -120,18 +107,6 @@ Computers = function () {
                 return x === valueToFind;
             });
         });
-    };
-
-    this.setRawNameAndValueToFind = function (rawName, valueToFind) {
-        if (rawName === 'Computer name') {
-            self.arrOfComputers(self.selectors.computerNameRawSelector, valueToFind);
-        } else if (rawName === 'Introduced') {
-            self.arrOfComputers(self.selectors.introducedRawSelector, valueToFind);
-        } else if (rawName === 'Discontinued') {
-            self.arrOfComputers(self.selectors.discontinuedRawSelector, valueToFind);
-        } else if (rawName === 'Company') {
-            self.arrOfComputers(self.selectors.companyRawSelector, valueToFind);
-        }
     };
 
     this.getListofComps = function () {
@@ -169,9 +144,8 @@ Computers = function () {
         })
     };
 
-
     this.getThatStaff = function () {
-        return $$('.computers tbody tr td a').map(function (items) {
+        return $$(self.selectors.computersNameField).map(function (items) {
             return {
                 'items': items.getText()
             }
@@ -192,8 +166,5 @@ Computers = function () {
         })
     };
 
-    this.checkNextIsDisabled = function () {
-        console.log(" next disabled: " + element(by.css('.next.disabled')).isDisplayed());
-    }
 };
 module.exports = new Computers();

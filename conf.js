@@ -3,8 +3,10 @@
 exports.config = {
     directConnect: true,
     baseUrl: 'https://jqueryui.com/',
+    // baseUrl: 'http://computer-database.herokuapp.com',
     framework: 'custom',
     frameworkPath: require.resolve('protractor-cucumber-framework'),
+    // specs: ['features/deleteByName.feature'],
     specs: ['features/jquaryui/*.feature'],
     capabilities: {
         browserName: 'chrome',

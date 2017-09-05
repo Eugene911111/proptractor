@@ -1,11 +1,6 @@
 'use strict';
 var computers = require('../../pages/Computers');
-
-var chai = require('chai');
-var chaiAsPromised = require('chai-as-promised');
-chai.use(chaiAsPromised);
-
-var expect = chai.expect;
+var helper = require('../../helpers/helper');
 
 module.exports = function () {
 
@@ -17,6 +12,6 @@ module.exports = function () {
     });
 
     this.Then(/^Check that message "([^"]*)" appeared$/, {timeout: 220 * 1000}, function (message, callback) {
-        expect(computers.getTextFromAlertMessage()).to.eventually.equal(message).and.notify(callback);
+        helper.expect(computers.getTextFromAlertMessage()).to.eventually.equal(message).and.notify(callback);
     });
 };

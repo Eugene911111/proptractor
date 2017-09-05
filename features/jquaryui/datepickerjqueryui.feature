@@ -6,4 +6,4 @@ Feature: Select Date on datepicker
 
     When I open datepicker page
     And I open datepicker
-    And I select date "August" "2019" "20"
+    And I select date "August" "2018" "20"
