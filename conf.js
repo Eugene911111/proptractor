@@ -6,12 +6,12 @@ exports.config = {
     // baseUrl: 'http://computer-database.herokuapp.com',
     framework: 'custom',
     frameworkPath: require.resolve('protractor-cucumber-framework'),
-    // specs: ['features/deleteByName.feature'],
-    specs: ['features/jquaryui/*.feature'],
+    // specs: ['features/updateComputerStep.feature'],
+    specs: ['features/jquaryui/tooltipjqueryui.feature'],
     capabilities: {
         browserName: 'chrome',
         // shardTestFiles: true,
-        // maxInstances: 2
+        // maxInstances: 3
     },
     cucumberOpts: {
         require: ['features/step_definitions/*.js', 'features/step_definitions/jquaryui/*.js', 'features/reporter.js'],
@@ -23,4 +23,7 @@ exports.config = {
         browser.ignoreSynchronization = true;
     },
     reporters: ['progress', 'allure'],
+    params: {
+        screenshotsBasePath: 'screenshots'
+    }
 };

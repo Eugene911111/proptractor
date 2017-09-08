@@ -1,9 +1,9 @@
-var computers = require('../../pages/Computers');
-var selectors = computers.selectors;
+let computers = require('../../pages/Computers');
+let selectors = computers.selectors;
 describe('Cover functionality:', function () {
 
     it('delete computer', function () {
-         computers.deleteComputeByName(selectors.computerName);
+        computers.deleteComputeByName(selectors.computerName);
     });
 
     it('delete updated computer', function () {

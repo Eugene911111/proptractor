@@ -1,7 +1,7 @@
-var helper = require('../helpers/helper');
-var Jquery;
-Jquery = function () {
-    var self = this;
+let helper = require('../helpers/helper');
+
+let Jquery = function () {
+    let self = this;
 
     this.selectors = {
         fieldWithSection4Text: '#ui-id-8 p:nth-child(1)',
@@ -17,7 +17,8 @@ Jquery = function () {
         iframe: '.demo-frame',
         tooltipsLink: 'body p:nth-child(1) a',
         londonRadioButton: 'label[for="radio-3"]',
-        _4StarCheckBox: 'label[for="checkbox-3"]'
+        _4StarCheckBox: 'label[for="checkbox-3"]',
+        elementToScroll: '.view-source'
     };
 
     this.getTextFromSection4 = function () {

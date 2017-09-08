@@ -4,36 +4,36 @@ var helper = require('../../helpers/helper');
 
 module.exports = function () {
 
-    this.When(/^Search computer by name "([^"]*)"$/, function (computerName, callback) {
+    this.When(/^Search computer by name "([^"]*)"$/, (computerName, callback) => {
         computers.searchComputer(computerName);
         callback();
     });
 
-    this.Then(/^Check that computer with name "([^"]*)" is displayed$/, function (computerName, callback) {
+    this.Then(/^Check that computer with name "([^"]*)" is displayed$/, (computerName, callback) => {
         helper.expect(computers.getTextFromFirstLink()).to.eventually.equal(computerName).and.notify(callback);
     });
 
-    this.Then(/^Check that computer with name "([^"]*)" is in list of computers$/, {timeout: 120 * 1000}, function (computerName, callback) {
+    this.Then(/^Check that computer with name "([^"]*)" is in list of computers$/, {timeout: 120 * 1000}, (computerName, callback) => {
         helper.expect(computers.checkThatComputerWithNameIsInListOfComputers(computerName)).to.eventually.equal(true).and.notify(callback);
     });
 
-    this.Then(/^I can verify computers info:$/, function (data) {
+    this.Then(/^I can verify computers info:$/, (data) => {
         var dataFromTable = data.hashes();
-        return computers.getListofComps().then(function (data) {
+        return computers.getListofComps().then((data) => {
             return data["Computer name"] === dataFromTable["Computer name"] && data.Introduced === dataFromTable.Introduced && data.Discontinued === dataFromTable.Discontinued && data.Company === dataFromTable.Company
         });
     });
 
-    this.Then(/^I clear a search field$/, function () {
-        return $(computers.selectors.filterByComputerNameField).clear().then(function () {
+    this.Then(/^I clear a search field$/, () => {
+        return $(computers.selectors.filterByComputerNameField).clear().then(() => {
             return $(computers.selectors.filterByNameButton).click();
         });
     });
 
-    this.Then(/^I can go to list of computers from "([^"]*)" point$/, function (value, callback) {
+    this.Then(/^I can go to list of computers from "([^"]*)" point$/, (value, callback) => {
         var numberOfclickingNextButton = +value.split('')[0];
         var t;
-        $(computers.selectors.displayingField).getText().then(function (text) {
+        $(computers.selectors.displayingField).getText().then((text) => {
             t = text.split(" ")[1] + '';
             if (t != value) {
                 for (var i = 0; i < numberOfclickingNextButton; i++) {
@@ -44,23 +44,23 @@ module.exports = function () {
         callback();
     });
 
-    this.When(/^I open url$/, function () {
+    this.When(/^I open url$/, () => {
         return browser.get('/');
     });
 
-    this.When(/^I click that staff till see comp with name: "([^"]*)"$/, function (compNameToSee) {
+    this.When(/^I click that staff till see comp with name: "([^"]*)"$/, (compNameToSee) => {
         function process(index) {
             var t;
-            $(computers.selectors.displayingField).getText().then(function (text) {
+            $(computers.selectors.displayingField).getText().then((text) => {
                 t = text.split(" ")[5] + '';
                 var maxNumberOfIterations = +(t.split('')[0] + t.split('')[1]);
                 if (index >= maxNumberOfIterations) {
                     return;
                 }
             });
-            computers.checkStaff(compNameToSee).then(function (text) {
+            computers.checkStaff(compNameToSee).then((text) => {
                 if (text == false) {
-                    return $(computers.selectors.nextButton).click().then(function () {
+                    return $(computers.selectors.nextButton).click().then(() => {
                         return process(index + 1);
                     })
                 }
@@ -73,20 +73,20 @@ module.exports = function () {
     });
 
 
-    this.When(/^I delete that staff till see comp with name: "([^"]*)"$/, function (compNameToSee, callback) {
+    this.When(/^I delete that staff till see comp with name: "([^"]*)"$/, (compNameToSee, callback) => {
         function process(index) {
             var t;
-            $(computers.selectors.displayingField).getText().then(function (text) {
+            $(computers.selectors.displayingField).getText().then((text) => {
                 t = text.split(" ")[5] + '';
-                return computers.checkStaff(compNameToSee).then(function (text) {
+                return computers.checkStaff(compNameToSee).then((text) => {
                     if (text == false) {
-                        $(computers.selectors.nextButton).click().then(function () {
+                        $(computers.selectors.nextButton).click().then(() => {
                             process(index + 1);
                         })
                     }
                     else if (text == true) {
-                        element(by.xpath("//tbody/tr/td/a[contains(., '" + compNameToSee + "')]")).click().then(function () {
-                            return $(computers.selectors.deleteThisComputerButton).click().then(function () {
+                        element(by.xpath("//tbody/tr/td/a[contains(., '" + compNameToSee + "')]")).click().then(() => {
+                            return $(computers.selectors.deleteThisComputerButton).click().then(() => {
                                 return process(index + 1);
                             })
                         });
