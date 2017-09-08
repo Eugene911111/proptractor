@@ -3,14 +3,6 @@ var helper = require('../../../helpers/helper');
 var jquery = require('../../../pages/Jquery');
 
 module.exports = function () {
-    afterEach(function() {
-        var passed = jasmine.getEnv().currentSpec.results().passed();
-        if (!passed) {
-            browser.takeScreenshot().then(function(png) {
-                // Do something with the png...
-            });
-        }
-    });
 
     this.When(/^I open droppable page$/, () => {
         return browser.get('/droppable/#default/');
