@@ -32,139 +32,102 @@ Computers = function () {
         computersNameField: '.computers tbody tr td a'
     };
 
-    this.addNewComputer = function (newComputerName) {
-        return browser.get('/').then(function () {
+    this.addNewComputer = (newComputerName) => browser.get('/')
+        .then(() => $(self.selectors.addNewComputerButton).click())
+        .then(() => $(self.selectors.computerNameField).sendKeys(newComputerName))
+        .then(() => $(self.selectors.introducedDateField).sendKeys(self.selectors.introducedDateValue))
+        .then(() => $(self.selectors.discontinuedDateField).sendKeys(self.selectors.discontinuedDateValue))
+        .then(() => $$(self.selectors.selectAppleInc).click())
+        .then(() => $$(self.selectors.createThisComputerButton).click());
+
+    this.addNewComputer = (newComputerName) => {
+        return browser.get('/').then(() => {
             return $(self.selectors.addNewComputerButton).click()
-        }).then(function () {
-            return $(self.selectors.computerNameField).sendKeys(newComputerName)
-        }).then(function () {
-            return $(self.selectors.introducedDateField).sendKeys(self.selectors.introducedDateValue)
-        }).then(function () {
-            return $(self.selectors.discontinuedDateField).sendKeys(self.selectors.discontinuedDateValue)
-        }).then(function () {
-            return $$(self.selectors.selectAppleInc).click()
-        }).then(function () {
-            return $$(self.selectors.createThisComputerButton).click();
         })
-
-    };
-    this.checkAlertMessageIsDisplayed = function () {
-        helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), 'Done! Computer Apple 747 has been created');
-    };
-
-    this.searchComputer = function (computerName) {
-        return browser.get('/').then(function () {
-            return $(self.selectors.filterByComputerNameField).sendKeys(computerName)
-        }).then(function () {
-            return $(self.selectors.filterByNameButton).click();
-        });
-
-    };
-    this.checkAfterSearch = function () {
-        return helper.expect(element(by.linkText(self.selectors.computerName)).getTagName()).toBe('a');
-
-    };
-    this.upDateComputerName = function (oldName, newName) {
-        return browser.get('/').then(function () {
-            return $(self.selectors.filterByComputerNameField).sendKeys(oldName)
-        }).then(function () {
-            return $(self.selectors.filterByNameButton).click()
-        }).then(function () {
-            return element(by.linkText(oldName)).getTagName().click()
-        }).then(function () {
-            return $(self.selectors.computerNameField).clear()
-        }).then(function () {
-            return $(self.selectors.computerNameField).sendKeys(newName)
-        }).then(function () {
-            return $$(self.selectors.createThisComputerButton).click();
-        })
-
-    };
-    this.checkThatNewNameIsSaved = function (newName) {
-        return helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), newName);
-    };
-
-    this.deleteComputeByName = function () {
-        return browser.get('/').then(function () {
-            return $(self.selectors.filterByComputerNameField).sendKeys(self.selectors.computerName)
-        }).then(function () {
-            return $(self.selectors.filterByNameButton).click()
-        }).then(function () {
-            return element(by.linkText(self.selectors.computerName)).getTagName().click()
-        }).then(function () {
-            return $$(self.selectors.deleteThisComputerButton).click();
-        })
-    };
-
-    this.checkComputerHasBeenDeleted = function () {
-        return helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), self.selectors.computerHasBeenDeletedMessage);
-    };
-
-    this.arrOfComputers = function (rawSelector, valueToFind) {
-        return $$(rawSelector).getText().then(function (textFromPage) {
-            return textFromPage.filter(function (x) {
-                console.log(x === valueToFind);
-                return x === valueToFind;
-            });
-        });
-    };
-
-    this.getListofComps = function () {
-        return $$('.computers tbody tr').map(function (items) {
-            return {
-                'Computer name': items.$$('td').get(0).getText(),
-                'Introduced': items.$$('td').get(1).getText(),
-                'Discontinued': items.$$('td').get(2).getText(),
-                'Company': items.$$('td').get(3).getText()
-            }
-        })
-    };
-
-    this.checkValueFromList = function (comp, colm, value) {
-        this.getListofComps().then(function (list) {
-            console.log(list.some(function (item) {
-                return (item["Computer name"] === comp && item[colm] === value);
-            }))
-        })
-    };
-
-    this.getTextFromAlertMessage = function () {
-        return $(self.selectors.alertMessageWarningField).getText();
-    };
-
-    this.getTextFromFirstLink = function () {
-        return $(self.selectors.firstLinkInList).getText();
-    };
-
-    this.checkThatComputerWithNameIsInListOfComputers = function (computerName) {
-        return this.getListofComps().then(function (list) {
-            return list.some(function (item) {
-                return (item["Computer name"] === computerName);
+            .then(() => {
+                return $(self.selectors.computerNameField).sendKeys(newComputerName)
+            }).then(() => {
+                return $(self.selectors.introducedDateField).sendKeys(self.selectors.introducedDateValue)
+            }).then(() => {
+                return $(self.selectors.discontinuedDateField).sendKeys(self.selectors.discontinuedDateValue)
+            }).then(() => {
+                return $$(self.selectors.selectAppleInc).click()
+            }).then(() => {
+                return $$(self.selectors.createThisComputerButton).click();
             })
-        })
     };
 
-    this.getThatStaff = function () {
-        return $$(self.selectors.computersNameField).map(function (items) {
-            return {
-                'items': items.getText()
+    this.checkAlertMessageIsDisplayed = () => helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), 'Done! Computer Apple 747 has been created');
+
+    this.searchComputer = (computerName) => browser.get('/')
+        .then(() => $(self.selectors.filterByComputerNameField).sendKeys(computerName))
+        .then(() => $(self.selectors.filterByNameButton).click());
+
+    this.checkAfterSearch = () => helper.expect(element(by.linkText(self.selectors.computerName)).getTagName()).toBe('a');
+
+    this.upDateComputerName = (oldName, newName) => browser.get('/')
+        .then(() => $(self.selectors.filterByComputerNameField).sendKeys(oldName))
+        .then(() => $(self.selectors.filterByNameButton).click())
+        .then(() => element(by.linkText(oldName)).getTagName().click())
+        .then(() => $(self.selectors.computerNameField).clear())
+        .then(() => $(self.selectors.computerNameField).sendKeys(newName))
+        .then(() => $$(self.selectors.createThisComputerButton).click());
+
+    this.checkThatNewNameIsSaved = (newName) => helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), newName);
+
+    this.deleteComputeByName = () => browser.get('/')
+        .then(() => $(self.selectors.filterByComputerNameField).sendKeys(self.selectors.computerName))
+        .then(() => $(self.selectors.filterByNameButton).click())
+        .then(() => element(by.linkText(self.selectors.computerName)).getTagName().click())
+        .then(() => $$(self.selectors.deleteThisComputerButton).click());
+
+    this.checkComputerHasBeenDeleted = () => helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), self.selectors.computerHasBeenDeletedMessage);
+
+    this.getListofComps = () => $$('.computers tbody tr').map((items) => {
+        return {
+            'Computer name': items.$$('td').get(0).getText(),
+            'Introduced': items.$$('td').get(1).getText(),
+            'Discontinued': items.$$('td').get(2).getText(),
+            'Company': items.$$('td').get(3).getText()
+        }
+    });
+
+    this.checkValueFromList = (comp, colm, value) => this.getListofComps()
+        .then((list) => console.log(list.some((item) => (item["Computer name"] === comp && item[colm] === value))));
+
+    this.getTextFromAlertMessage = () => $(self.selectors.alertMessageWarningField).getText();
+
+    this.getTextFromFirstLink = () => $(self.selectors.firstLinkInList).getText();
+
+    this.checkThatComputerWithNameIsInListOfComputers = (computerName) => this.getListofComps()
+        .then((list) => list.some((item) => (item["Computer name"] === computerName)));
+
+    this.getThatStaff = () => $$(self.selectors.computersNameField).map((items) => {
+        return {
+            'items': items.getText()
+        }
+    });
+
+    this.checkStaff = (compName) => this.getThatStaff()
+        .then((list) => list.some((item) => (item.items === compName)));
+
+    this.clicker = () => $(self.selectors.nextButton).click()
+        .then(() => self.clicker());
+
+
+    this.fucFirst = function (stri) {
+        let string = stri;
+        for (let i = 0; i < string.length; i++) {
+
+            if (string[i] !== ' ') {
+                let srt = string[i].toUpperCase() + string.slice(i + 1);
+                console.log("Your result is: " + srt);
+                break;
             }
-        })
-    };
+            else if (string[i] === ' ') {
+            }
 
-    this.checkStaff = function (compName) {
-        return this.getThatStaff().then(function (list) {
-            return list.some(function (item) {
-                return (item.items === compName);
-            })
-        })
-    };
-
-    this.clicker = function () {
-        $(self.selectors.nextButton).click().then(function () {
-            self.clicker();
-        })
-    };
-
+        }
+    }
 };
 module.exports = new Computers();

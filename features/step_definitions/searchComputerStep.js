@@ -19,16 +19,12 @@ module.exports = function () {
 
     this.Then(/^I can verify computers info:$/, (data) => {
         var dataFromTable = data.hashes();
-        return computers.getListofComps().then((data) => {
-            return data["Computer name"] === dataFromTable["Computer name"] && data.Introduced === dataFromTable.Introduced && data.Discontinued === dataFromTable.Discontinued && data.Company === dataFromTable.Company
-        });
+        return computers.getListofComps().then((data) => data["Computer name"] === dataFromTable["Computer name"] && data.Introduced === dataFromTable.Introduced && data.Discontinued === dataFromTable.Discontinued && data.Company === dataFromTable.Company);
     });
 
-    this.Then(/^I clear a search field$/, () => {
-        return $(computers.selectors.filterByComputerNameField).clear().then(() => {
-            return $(computers.selectors.filterByNameButton).click();
-        });
-    });
+    this.Then(/^I clear a search field$/, () => $(computers.selectors.filterByComputerNameField).clear()
+        .then(() => $(computers.selectors.filterByNameButton).click())
+    );
 
     this.Then(/^I can go to list of computers from "([^"]*)" point$/, (value, callback) => {
         var numberOfclickingNextButton = +value.split('')[0];
@@ -44,9 +40,7 @@ module.exports = function () {
         callback();
     });
 
-    this.When(/^I open url$/, () => {
-        return browser.get('/');
-    });
+    this.When(/^I open url$/, () => browser.get('/'));
 
     this.When(/^I click that staff till see comp with name: "([^"]*)"$/, (compNameToSee) => {
         function process(index) {
@@ -60,9 +54,8 @@ module.exports = function () {
             });
             computers.checkStaff(compNameToSee).then((text) => {
                 if (text == false) {
-                    return $(computers.selectors.nextButton).click().then(() => {
-                        return process(index + 1);
-                    })
+                    return $(computers.selectors.nextButton).click().then(() => process(index + 1)
+                    )
                 }
                 else if (text == true) {
                 }
@@ -76,23 +69,22 @@ module.exports = function () {
     this.When(/^I delete that staff till see comp with name: "([^"]*)"$/, (compNameToSee, callback) => {
         function process(index) {
             var t;
-            $(computers.selectors.displayingField).getText().then((text) => {
-                t = text.split(" ")[5] + '';
-                return computers.checkStaff(compNameToSee).then((text) => {
-                    if (text == false) {
-                        $(computers.selectors.nextButton).click().then(() => {
-                            process(index + 1);
-                        })
-                    }
-                    else if (text == true) {
-                        element(by.xpath("//tbody/tr/td/a[contains(., '" + compNameToSee + "')]")).click().then(() => {
-                            return $(computers.selectors.deleteThisComputerButton).click().then(() => {
-                                return process(index + 1);
-                            })
+            $(computers.selectors.displayingField).getText()
+                .then((text) => {
+                    t = text.split(" ")[5] + '';
+                    return computers.checkStaff(compNameToSee)
+                        .then((text) => {
+                            if (text === false) {
+                                $(computers.selectors.nextButton).click()
+                                    .then(() => process(index + 1))
+                            }
+                            else if (text === true) {
+                                element(by.xpath("//tbody/tr/td/a[contains(., '" + compNameToSee + "')]")).click()
+                                    .then(() => $(computers.selectors.deleteThisComputerButton).click()
+                                        .then(() => process(index + 1)));
+                            }
                         });
-                    }
                 });
-            });
             callback();
         }
 

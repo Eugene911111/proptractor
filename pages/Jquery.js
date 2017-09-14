@@ -21,29 +21,26 @@ let Jquery = function () {
         elementToScroll: '.view-source'
     };
 
-    this.getTextFromSection4 = function () {
+    this.getTextFromSection4 = () => {
         return $(self.selectors.fieldWithSection4Text).getText();
     };
 
-    this.checkThatSection4IsOpened = function () {
-        return helper.waitForTextToBePresentInElement($(self.selectors.fieldWithSection4Text), '');
-    };
+    this.checkThatSection4IsOpened = () => helper.waitForTextToBePresentInElement($(self.selectors.fieldWithSection4Text), '');
 
-    this.getMonthAndYearFromDatepicker = function () {
-        return $$('.ui-datepicker-title').map(function (date) {
-            return {
-                'month': date.$('.ui-datepicker-month').getText(),
-                'year': date.$('.ui-datepicker-year').getText()
-            }
-        })
-    };
+    this.getMonthAndYearFromDatepicker = () => $$('.ui-datepicker-title').map((date) => {
+        return {
+            'month': date.$('.ui-datepicker-month').getText(),
+            'year': date.$('.ui-datepicker-year').getText()
+        }
+    });
 
-    this.checkDate = function (month, year) {
-        return this.getMonthAndYearFromDatepicker().then(function (list) {
-            return (list.some(function (date) {
-                return (date.month === month && date.year === year);
-            }))
-        })
+    this.checkDate = (month, year) => {
+        return this.getMonthAndYearFromDatepicker()
+            .then((list) => {
+                return (list.some((date) => {
+                    return (date.month === month && date.year === year);
+                }))
+            })
     };
 
 };
