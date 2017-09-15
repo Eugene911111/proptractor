@@ -21,9 +21,7 @@ let Jquery = function () {
         elementToScroll: '.view-source'
     };
 
-    this.getTextFromSection4 = () => {
-        return $(self.selectors.fieldWithSection4Text).getText();
-    };
+    this.getTextFromSection4 = () => $(self.selectors.fieldWithSection4Text).getText();
 
     this.checkThatSection4IsOpened = () => helper.waitForTextToBePresentInElement($(self.selectors.fieldWithSection4Text), '');
 
@@ -34,14 +32,8 @@ let Jquery = function () {
         }
     });
 
-    this.checkDate = (month, year) => {
-        return this.getMonthAndYearFromDatepicker()
-            .then((list) => {
-                return (list.some((date) => {
-                    return (date.month === month && date.year === year);
-                }))
-            })
-    };
+    this.checkDate = (month, year) => this.getMonthAndYearFromDatepicker()
+        .then((list) => (list.some((date) => (date.month === month && date.year === year))));
 
 };
 module.exports = new Jquery();

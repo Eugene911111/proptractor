@@ -3,10 +3,10 @@ var Helper = function () {
 
     this.EC = protractor.ExpectedConditions;
     this.expect = function (toExpect) {
-        var chai = require('chai');
-        var chaiAsPromised = require('chai-as-promised');
+        let chai = require('chai');
+        let chaiAsPromised = require('chai-as-promised');
         chai.use(chaiAsPromised);
-        var expect = chai.expect;
+        let expect = chai.expect;
         return expect(toExpect);
     };
 

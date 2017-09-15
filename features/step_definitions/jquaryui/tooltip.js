@@ -13,7 +13,6 @@ module.exports = function () {
         .then(() => helper.waitForElementToBeVisible($(jquery.selectors.tooltip)))
     );
 
-    this.When(/^I check that the tooltip appeared$/, (callback) => {
-        helper.expect(($(jquery.selectors.tooltip).isDisplayed())).to.eventually.equal(true).and.notify(callback);
-    });
+    this.When(/^I check that the tooltip appeared$/, () =>
+        helper.expect(($(jquery.selectors.tooltip).isDisplayed())).to.eventually.equal(true));
 };

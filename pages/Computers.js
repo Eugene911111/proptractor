@@ -2,7 +2,7 @@ var helper = require('../helpers/helper');
 var Computers;
 
 Computers = function () {
-    var self = this;
+    let self = this;
     this.selectors = {
         addNewComputerButton: '#add',
         computerHasBeenCreatedMessage: 'Done! Computer Apple 747 has been created',
@@ -29,7 +29,8 @@ Computers = function () {
         firstLinkInList: '.computers.zebra-striped tbody tr:first-child td:first-child',
         nextButton: '.next a',
         displayingField: '.current a',
-        computersNameField: '.computers tbody tr td a'
+        computersNameField: '.computers tbody tr td a',
+        alertMessage: 'Done! Computer Apple 747 has been created'
     };
 
     this.addNewComputer = (newComputerName) => browser.get('/')
@@ -40,24 +41,8 @@ Computers = function () {
         .then(() => $$(self.selectors.selectAppleInc).click())
         .then(() => $$(self.selectors.createThisComputerButton).click());
 
-    this.addNewComputer = (newComputerName) => {
-        return browser.get('/').then(() => {
-            return $(self.selectors.addNewComputerButton).click()
-        })
-            .then(() => {
-                return $(self.selectors.computerNameField).sendKeys(newComputerName)
-            }).then(() => {
-                return $(self.selectors.introducedDateField).sendKeys(self.selectors.introducedDateValue)
-            }).then(() => {
-                return $(self.selectors.discontinuedDateField).sendKeys(self.selectors.discontinuedDateValue)
-            }).then(() => {
-                return $$(self.selectors.selectAppleInc).click()
-            }).then(() => {
-                return $$(self.selectors.createThisComputerButton).click();
-            })
-    };
-
-    this.checkAlertMessageIsDisplayed = () => helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), 'Done! Computer Apple 747 has been created');
+    this.alertMessage = (alertMessage) =>
+        helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), alertMessage);
 
     this.searchComputer = (computerName) => browser.get('/')
         .then(() => $(self.selectors.filterByComputerNameField).sendKeys(computerName))
@@ -73,7 +58,8 @@ Computers = function () {
         .then(() => $(self.selectors.computerNameField).sendKeys(newName))
         .then(() => $$(self.selectors.createThisComputerButton).click());
 
-    this.checkThatNewNameIsSaved = (newName) => helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), newName);
+    this.checkThatNewNameIsSaved = (newName) =>
+        helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), newName);
 
     this.deleteComputeByName = () => browser.get('/')
         .then(() => $(self.selectors.filterByComputerNameField).sendKeys(self.selectors.computerName))
@@ -81,7 +67,8 @@ Computers = function () {
         .then(() => element(by.linkText(self.selectors.computerName)).getTagName().click())
         .then(() => $$(self.selectors.deleteThisComputerButton).click());
 
-    this.checkComputerHasBeenDeleted = () => helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), self.selectors.computerHasBeenDeletedMessage);
+    this.checkComputerHasBeenDeleted = () =>
+        helper.waitForTextToBePresentInElement($(self.selectors.alertMessageWarningField), self.selectors.computerHasBeenDeletedMessage);
 
     this.getListofComps = () => $$('.computers tbody tr').map((items) => {
         return {
@@ -110,10 +97,6 @@ Computers = function () {
 
     this.checkStaff = (compName) => this.getThatStaff()
         .then((list) => list.some((item) => (item.items === compName)));
-
-    this.clicker = () => $(self.selectors.nextButton).click()
-        .then(() => self.clicker());
-
 
     this.fucFirst = function (stri) {
         let string = stri;

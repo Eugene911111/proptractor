@@ -8,7 +8,7 @@ module.exports = function () {
     this.When(/^I open datepicker$/, () => helper.switchToIframe()
         .then(() => $(jquery.selectors.datePickerField).click()));
 
-    this.When(/^I select date "([^"]*)" "([^"]*)" "([^"]*)"$/, (month, year, day, callback) => {
+    this.When(/^I select date "([^"]*)" "([^"]*)" "([^"]*)"$/, (month, year, day) => {
         function selectDate(index) {
             if (index >= 100) {
                 return;
@@ -21,7 +21,6 @@ module.exports = function () {
                     return element(by.xpath('//tbody//a[contains(., ' + day + ')]')).click();
                 }
             });
-            callback();
         }
 
         selectDate(0);

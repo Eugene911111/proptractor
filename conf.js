@@ -2,12 +2,12 @@
 
 exports.config = {
     directConnect: true,
-    // baseUrl: 'https://jqueryui.com/',
-    baseUrl: 'http://computer-database.herokuapp.com',
+    baseUrl: 'https://jqueryui.com/',
+    // baseUrl: 'http://computer-database.herokuapp.com',
     framework: 'custom',
     frameworkPath: require.resolve('protractor-cucumber-framework'),
-    specs: ['features/addComputerStep.feature'],
-    // specs: ['features/jquaryui/tooltipjqueryui.feature'],
+    // specs: ['features/updateComputerStep.feature'],
+    specs: ['features/jquaryui/accordionjqueryui.feature'],
     capabilities: {
         browserName: 'chrome',
         // shardTestFiles: true,
